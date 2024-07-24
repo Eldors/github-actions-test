@@ -10,14 +10,11 @@ jobs:
     environment: alt-client-review
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: '16'
+          path: main
 
       - name: Echo head ref
         run: |
-          echo "test 2 ${{ github }}"
+          echo "test 2 ${{ github.sha }} | ${{ github.workflow_sha }}"
