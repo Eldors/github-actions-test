@@ -1,0 +1,23 @@
+on:
+  push:
+    # For the develop branch only.
+    branches:
+      - main
+
+jobs:
+  deploy-to-test-server-for-reveiw:
+    runs-on: ubuntu-latest
+    environment: alt-client-review
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Echo head ref
+        run: |
+          echo "${{ github.head_ref }}"
