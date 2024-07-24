@@ -20,4 +20,4 @@ jobs:
 
       - name: Echo head ref
         run: |
-          echo "${{ github.head_ref }}"
+          echo "test 2 ${{ github }}"
