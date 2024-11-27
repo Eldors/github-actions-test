@@ -13,6 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Test Env
+        run: |
+          echo "${{env.TEST_ENV}}"
+
       - name: Echo head ref
         run: |
           echo "test 2 ${{ github.sha }} | ${{ github.workflow_sha }}"
