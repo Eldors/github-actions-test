@@ -16,4 +16,4 @@ jobs:
       - name: Test Env
         run: |
           source .env
-          echo "${{env.TEST_ENV}}"
+          echo "${{TEST_ENV}}"
