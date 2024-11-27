@@ -15,5 +15,5 @@ jobs:
 
       - name: Test Env
         run: |
-          source .env
-          echo "${{TEST_ENV}}"
+          source src/.env
+          echo "$TEST_ENV"
