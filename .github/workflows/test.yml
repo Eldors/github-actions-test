@@ -15,8 +15,5 @@ jobs:
 
       - name: Test Env
         run: |
+          source .env
           echo "${{env.TEST_ENV}}"
-
-      - name: Echo head ref
-        run: |
-          echo "test 2 ${{ github.sha }} | ${{ github.workflow_sha }}"
