@@ -1,0 +1,34 @@
+name: Test SSH Setup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-ssh-setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Установка фиктивных значений для теста
+      - name: Set fake secrets
+        env:
+          SSH_PRIVATE_KEY: "FAKE_PRIVATE_KEY_CONTENT"
+          SSH_HOST: "example.com"
+        run: |
+          echo "Testing SSH setup with fake values"
+
+      # Шаг 2: Тестирование установки SSH-ключей
+      - name: Install and setup SSH keys
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ env.SSH_HOST }} > ~/.ssh/known_hosts
+
+      # Шаг 3: Проверка результата
+      - name: Check generated files
+        run: |
+          ls -l ~/.ssh/
+          cat ~/.ssh/id_rsa
+          cat ~/.ssh/known_hosts
