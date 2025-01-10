@@ -19,12 +19,12 @@ jobs:
       # Шаг 2: Тестирование установки SSH-ключей
       - name: Install and setup SSH keys
         env:
-          SSH_PRIVATE_KEY: ${{ env.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ env.SSH_HOST }}
+          SSH_PRIVATE_KEY: "FAKE_PRIVATE_KEY_CONTENT"
+          SSH_HOST: "example.com"
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ env.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ env.SSH_HOST }} > ~/.ssh/known_hosts
+          echo $SSH_PRIVATE_KEY > ~/.ssh/id_rsa
+          ssh-keyscan -H $SSH_HOST > ~/.ssh/known_hosts
 
       # Шаг 3: Проверка результата
       - name: Check generated files
