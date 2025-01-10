@@ -8,13 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install and setup SSH keys
+      - name: Add SSH key
         env:
-          SSH_PRIVATE_KEY: FAKE_PRIVATE_KEY_CONTENT
-          SSH_HOST: example.com
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "FAKE_PRIVATE_KEY_CONTENT" > ~/.ssh/id_rsa
+          mkdir -p /home/runner/.ssh
+          ssh-keyscan example.com >> /home/runner/.ssh/known_hosts
+          echo "${{ secrets.DOKKU_SSH_KEY }}" > /home/runner/.ssh/github_actions
+          chmod 600 /home/runner/.ssh/github_actions
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null	
+          ssh-add /home/runner/.ssh/github_actions
 
       - name: Check generated files
         run: |
