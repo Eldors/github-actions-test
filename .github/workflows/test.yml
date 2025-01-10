@@ -1,8 +1,5 @@
 on:
-  push:
-    # For the develop branch only.
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   deploy-to-test-server-for-reveiw:
