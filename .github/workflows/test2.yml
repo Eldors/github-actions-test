@@ -8,19 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Шаг 1: Установка фиктивных значений для теста
-      - name: Set fake secrets
-        env:
-          SSH_PRIVATE_KEY: "FAKE_PRIVATE_KEY_CONTENT"
-          SSH_HOST: "example.com"
-        run: |
-          echo "Testing SSH setup with fake values"
-
-      # Шаг 2: Тестирование установки SSH-ключей
       - name: Install and setup SSH keys
         env:
-          SSH_PRIVATE_KEY: "FAKE_PRIVATE_KEY_CONTENT"
-          SSH_HOST: "example.com"
+          SSH_PRIVATE_KEY: FAKE_PRIVATE_KEY_CONTENT
+          SSH_HOST: example.com
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo $SSH_PRIVATE_KEY > ~/.ssh/id_rsa
