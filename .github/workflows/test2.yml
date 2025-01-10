@@ -14,12 +14,12 @@ jobs:
         run: |
           mkdir -p /home/runner/.ssh
           ssh-keyscan example.com >> /home/runner/.ssh/known_hosts
-          echo "asdfqwer asdfqwer asdf" > /home/runner/.ssh/github_actions
+          echo "key asdf" > /home/runner/.ssh/github_actions
           chmod 600 /home/runner/.ssh/github_actions
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null	
           ssh-add /home/runner/.ssh/github_actions
 
       - name: Check generated files
         run: |
-          ls -l ~/.ssh/
-          cat ~/.ssh/id_rsa
+          ls -l /home/runner/.ssh/
+          cat /home/runner/.ssh/github_actions
