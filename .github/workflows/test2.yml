@@ -15,11 +15,8 @@ jobs:
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
           echo "FAKE_PRIVATE_KEY_CONTENT" > ~/.ssh/id_rsa
-          ssh-keyscan -H "example.com" > ~/.ssh/known_hosts
 
-      # Шаг 3: Проверка результата
       - name: Check generated files
         run: |
           ls -l ~/.ssh/
           cat ~/.ssh/id_rsa
-          cat ~/.ssh/known_hosts
